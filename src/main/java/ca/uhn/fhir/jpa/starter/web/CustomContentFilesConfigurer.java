@@ -19,8 +19,8 @@ public class CustomContentFilesConfigurer implements WebMvcConfigurer {
 
 	public CustomContentFilesConfigurer(AppProperties appProperties) {
 		customContentPath = appProperties.getCustom_content_path();
-		if (customContentPath.endsWith("/"))
-			customContentPath = customContentPath.substring(0, customContentPath.lastIndexOf('/'));
+		// Ensure the path ends with a trailing slash for Spring resource locations
+		if (!customContentPath.endsWith("/")) customContentPath = customContentPath + "/";
 	}
 
 	@Override
