@@ -13,24 +13,25 @@ server:
 management:
   # Actuator endpoints: only /actuator/health exposed by default
   endpoints:
-    enabled-by-default: false
     web:
       exposure:
         include: "health"  # or "info,health,prometheus,metrics" or "*" for all
+    access:
+      default: none
   endpoint:
     info:
-      enabled: true
+      access: none
     metrics:
-      enabled: true
+      access: none
     health:
-      enabled: true
       probes:
         enabled: true
       group:
         liveness:
           include: [ "livenessState", "readinessState" ]
+      access: read_only
     prometheus:
-      enabled: true
+      access: read_only
   prometheus:
     metrics:
       export:
